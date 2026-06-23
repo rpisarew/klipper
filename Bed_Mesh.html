@@ -46,8 +46,8 @@
   
 
 
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-138371409-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-VEN1PGNQL4"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&gtag("event","search",{search_term:this.value})}),"undefined"!=typeof location$&&location$.subscribe(function(e){gtag("config","G-VEN1PGNQL4",{page_path:e.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VEN1PGNQL4"></script>
 
 
     
@@ -410,10 +410,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Installation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Installation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="Installation.html" class="md-nav__link">
         Installation
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OctoPrint.html" class="md-nav__link">
+        OctoPrint for Klipper
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -691,19 +738,6 @@
   <a href="#configuring-the-zero-reference-position" class="md-nav__link">
     Configuring the zero reference position
   </a>
-  
-    <nav class="md-nav" aria-label="Configuring the zero reference position">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-deprecated-relative_reference_index" class="md-nav__link">
-    The deprecated relative_reference_index
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1515,6 +1549,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Load_Cell.html" class="md-nav__link">
+        Load Cells
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1622,19 +1670,6 @@
   <a href="#configuring-the-zero-reference-position" class="md-nav__link">
     Configuring the zero reference position
   </a>
-  
-    <nav class="md-nav" aria-label="Configuring the zero reference position">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-deprecated-relative_reference_index" class="md-nav__link">
-    The deprecated relative_reference_index
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2081,9 +2116,9 @@ by heat or interference.  This can make calculating the probe's z-offset
 challenging, particularly at different bed temperatures.  As such, some
 printers use an endstop for homing the Z axis and a probe for calibrating the
 mesh. In this configuration it is possible offset the mesh so that the (X, Y)
-<code>reference position</code> applies zero adjustment.  The <code>reference postion</code> should
+<code>reference position</code> applies zero adjustment.  The <code>reference position</code> should
 be the location on the bed where a
-<a href="./Manual_Level#calibrating-a-z-endstop">Z_ENDSTOP_CALIBRATE</a>
+<a href="Manual_Level.html#calibrating-a-z-endstop">Z_ENDSTOP_CALIBRATE</a>
 paper test is performed.  The bed_mesh module provides the
 <code>zero_reference_position</code> option for specifying this coordinate:</p>
 <div class="highlight"><pre><span></span><code>[bed_mesh]
@@ -2106,26 +2141,6 @@ probe_count: 5, 3
   z-offset.  Note that this coordinate must NOT be in a location specified as
   a <code>faulty_region</code> if a probe is necessary.</li>
 </ul>
-<h4 id="the-deprecated-relative_reference_index">The deprecated relative_reference_index<a class="headerlink" href="#the-deprecated-relative_reference_index" title="Permanent link">&para;</a></h4>
-<p>Existing configurations using the <code>relative_reference_index</code> option must be
-updated to use the <code>zero_reference_position</code>.  The response to the
-<a href="#output">BED_MESH_OUTPUT PGP=1</a> gcode command will include the (X, Y)
-coordinate associated with the index;  this position may be used as the value for
-the <code>zero_reference_position</code>. The output will look similar to the following:</p>
-<div class="highlight"><pre><span></span><code>// bed_mesh: generated points
-// Index | Tool Adjusted | Probe
-// 0 | (1.0, 1.0) | (24.0, 6.0)
-// 1 | (36.7, 1.0) | (59.7, 6.0)
-// 2 | (72.3, 1.0) | (95.3, 6.0)
-// 3 | (108.0, 1.0) | (131.0, 6.0)
-... (additional generated points)
-// bed_mesh: relative_reference_index 24 is (131.5, 108.0)
-</code></pre></div>
-
-<p><em>Note:  The above output is also printed in <code>klippy.log</code> during initialization.</em></p>
-<p>Using the example above we see that the <code>relative_reference_index</code> is
-printed along with its coordinate.  Thus the <code>zero_reference_position</code>
-is <code>131.5, 108</code>.</p>
 <h3 id="faulty-regions">Faulty Regions<a class="headerlink" href="#faulty-regions" title="Permanent link">&para;</a></h3>
 <p>It is possible for some areas of a bed to report inaccurate results when
 probing due to a "fault" at specific locations.  The best example of this
@@ -2277,7 +2292,8 @@ be applied to changes in direction.</p>
 <em>Default Adaptive: 0</em> <br>
 <em>Default Adaptive Margin: 0</em></p>
 <p>Initiates the probing procedure for Bed Mesh Calibration.</p>
-<p>The mesh will be saved into a profile specified by the <code>PROFILE</code> parameter,
+<p>The mesh will be immediately ready to use when the command completes and saved
+into a profile specified by the <code>PROFILE</code> parameter,
 or <code>default</code> if unspecified. The <code>METHOD</code> parameter takes one of the following
 values:</p>
 <ul>
@@ -2334,6 +2350,9 @@ allowing the user to determine when a profile is loaded.  If a user wishes to
 load the <code>default</code> profile it is recommended to add
 <code>BED_MESH_PROFILE LOAD=default</code> to either their <code>START_PRINT</code> macro or their
 slicer's "Start G-Code" configuration, whichever is applicable.</p>
+<p>Note that this is not required if a new mesh is generated with
+<code>BED_MESH_CALIBRATE</code> in the <code>START_PRINT</code> macro or the slicer's "Start G-Code"
+and may produce unexpected results, especially with adaptive meshing.</p>
 <p>Alternatively the old behavior of loading a profile at startup can be
 restored with a <code>[delayed_gcode]</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[delayed_gcode bed_mesh_init]</span>
